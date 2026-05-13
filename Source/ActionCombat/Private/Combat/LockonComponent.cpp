@@ -10,8 +10,12 @@ ULockonComponent::ULockonComponent()
 void ULockonComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
 	
+}
+
+void ULockonComponent::StartLockon()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Lockon Started"));
 }
 
 
