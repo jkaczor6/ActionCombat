@@ -53,6 +53,22 @@ void ULockonComponent::StartLockon(float Radius)
 	SpringArmComp->TargetOffset = FVector{0.f,0.f,100.f};
 }
 
+void ULockonComponent::EndLockon()
+{
+	CurrentTargetActor = nullptr;
+	
+	Controller->ResetIgnoreLookInput();
+	MovementComp->bOrientRotationToMovement = true;
+	MovementComp->bUseControllerDesiredRotation = false;
+	
+	SpringArmComp->TargetOffset = FVector::ZeroVector;
+}
+
+void ULockonComponent::ToggleLockon(float Radius)
+{
+	if (!CurrentTargetActor) {StartLockon(Radius);} else {EndLockon();};
+}
+
 
 void ULockonComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
