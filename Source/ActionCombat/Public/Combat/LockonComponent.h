@@ -16,6 +16,8 @@ class ACTIONCOMBAT_API ULockonComponent : public UActorComponent
 	
 public:	
 	ULockonComponent();
+	
+	AActor* CurrentTargetActor;
 
 protected:
 	virtual void BeginPlay() override;
