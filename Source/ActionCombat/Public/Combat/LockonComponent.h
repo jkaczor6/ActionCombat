@@ -9,7 +9,11 @@ UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ACTIONCOMBAT_API ULockonComponent : public UActorComponent
 {
 	GENERATED_BODY()
-
+	
+	ACharacter* OwnerRef;
+	APlayerController* Controller;
+	class UCharacterMovementComponent* MovementComp;
+	
 public:	
 	ULockonComponent();
 

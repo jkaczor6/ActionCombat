@@ -1,9 +1,11 @@
 #include "Combat/LockonComponent.h"
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 ULockonComponent::ULockonComponent()
 {
 	PrimaryComponentTick.bCanEverTick = true;
-
+	
 }
 
 
@@ -11,17 +13,20 @@ void ULockonComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	OwnerRef = GetOwner<ACharacter>();
+	Controller = GetWorld()->GetFirstPlayerController();
+	MovementComp = OwnerRef->GetCharacterMovement();
 }
 
 void ULockonComponent::StartLockon(float Radius)
 {
 	FHitResult OutResult;
-	FVector CurrentLocation{ GetOwner()->GetActorLocation() };
+	FVector CurrentLocation{ OwnerRef->GetActorLocation() };
 	FCollisionShape Sphere{ FCollisionShape::MakeSphere(Radius) };
 	FCollisionQueryParams IgnoreParams{
 		FName{TEXT("Ignore Collision Params")},
 		false,
-		GetOwner()
+		OwnerRef
 	};
 	
 	bool bHasFoundTarget{GetWorld()->SweepSingleByChannel(
@@ -33,8 +38,13 @@ void ULockonComponent::StartLockon(float Radius)
 		Sphere,
 		IgnoreParams
 	)};
+	
 	if (!bHasFoundTarget) {return; }
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Actor detected: %s"), *OutResult.GetActor()->GetName()));
+	
+	Controller->SetIgnoreLookInput(true);
+	MovementComp->bOrientRotationToMovement = false;
+	MovementComp->bUseControllerDesiredRotation = true;
+	
 }
 
 
