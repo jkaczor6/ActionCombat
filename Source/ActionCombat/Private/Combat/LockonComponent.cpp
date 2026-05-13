@@ -13,9 +13,28 @@ void ULockonComponent::BeginPlay()
 	
 }
 
-void ULockonComponent::StartLockon()
+void ULockonComponent::StartLockon(float Radius)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Lockon Started"));
+	FHitResult OutResult;
+	FVector CurrentLocation{ GetOwner()->GetActorLocation() };
+	FCollisionShape Sphere{ FCollisionShape::MakeSphere(Radius) };
+	FCollisionQueryParams IgnoreParams{
+		FName{TEXT("Ignore Collision Params")},
+		false,
+		GetOwner()
+	};
+	
+	bool bHasFoundTarget{GetWorld()->SweepSingleByChannel(
+		OutResult,
+		CurrentLocation,
+		CurrentLocation,
+		FQuat::Identity,
+		ECollisionChannel::ECC_GameTraceChannel1,
+		Sphere,
+		IgnoreParams
+	)};
+	if (!bHasFoundTarget) {return; }
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Actor detected: %s"), *OutResult.GetActor()->GetName()));
 }
 
 
