@@ -15,4 +15,8 @@ class ACTIONCOMBAT_API IEnemy
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnSelect();
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnDeselect();
 };
