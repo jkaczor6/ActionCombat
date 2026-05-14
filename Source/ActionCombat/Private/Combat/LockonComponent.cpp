@@ -2,6 +2,7 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Interfaces/Enemy.h"
 #include "GameFramework/SpringArmComponent.h"
 
 ULockonComponent::ULockonComponent()
@@ -43,6 +44,7 @@ void ULockonComponent::StartLockon(float Radius)
 	)};
 	
 	if (!bHasFoundTarget) {return; }
+	if (!OutResult.GetActor()->Implements<UEnemy>()) { return; }
 	
 	CurrentTargetActor = OutResult.GetActor();
 	
