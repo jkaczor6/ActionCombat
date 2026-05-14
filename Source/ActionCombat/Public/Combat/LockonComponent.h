@@ -4,6 +4,11 @@
 #include "Components/ActorComponent.h"
 #include "LockonComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_OneParam(
+	FOnUpdatedTargetSignature,
+	ULockonComponent, OnUpdatedTargetDelegate,
+	AActor*, NewTargetActorRef
+	);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ACTIONCOMBAT_API ULockonComponent : public UActorComponent
@@ -19,7 +24,9 @@ public:
 	ULockonComponent();
 	
 	AActor* CurrentTargetActor;
-
+	
+	UPROPERTY(BlueprintAssignable)
+	FOnUpdatedTargetSignature OnUpdatedTargetDelegate;
 protected:
 	virtual void BeginPlay() override;
 	
