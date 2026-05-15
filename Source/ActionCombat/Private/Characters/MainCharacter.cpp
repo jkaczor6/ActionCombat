@@ -13,6 +13,7 @@ void AMainCharacter::BeginPlay()
 	
 	PlayerAnim = Cast<UPlayerAnimInstance>(GetMesh()->GetAnimInstance());
 	if (!PlayerAnim) { return; }
+	
 }
 
 void AMainCharacter::Tick(float DeltaTime)
