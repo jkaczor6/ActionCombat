@@ -18,6 +18,9 @@ class ACTIONCOMBAT_API UTraceComponent : public UActorComponent
 	FName End;
 	UPROPERTY(EditAnywhere)
 	FName Rotation;
+	
+	UPROPERTY(EditAnywhere)
+	double BoxLength{30.0};
 public:	
 	UTraceComponent();
 
