@@ -28,7 +28,9 @@ class ACTIONCOMBAT_API UTraceComponent : public UActorComponent
 	TArray<AActor*> TargetsToIgnore;
 public:	
 	UTraceComponent();
-
+	
+	UPROPERTY(VisibleAnywhere)
+	bool bIsAttacking{false};
 protected:
 	virtual void BeginPlay() override;
 
