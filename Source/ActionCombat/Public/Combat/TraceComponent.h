@@ -21,6 +21,9 @@ class ACTIONCOMBAT_API UTraceComponent : public UActorComponent
 	
 	UPROPERTY(EditAnywhere)
 	double BoxLength{30.0};
+	
+	UPROPERTY(EditAnywhere)
+	bool bDebugMode{ false };
 public:	
 	UTraceComponent();
 
