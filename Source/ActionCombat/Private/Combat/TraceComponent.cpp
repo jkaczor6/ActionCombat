@@ -2,6 +2,7 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Interfaces/Fighter.h"
+#include "Engine/DamageEvents.h"
 
 UTraceComponent::UTraceComponent()
 {
@@ -67,7 +68,17 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	if (!FighterRef) { return; }
 	
 	CharacterDamage = FighterRef->GetDamage();
+	FDamageEvent TargetAttacketEvent;	
 	
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Damage: %f"), CharacterDamage));
+	for (const FHitResult& Hit: OutResults)
+	{
+		AActor* TargetActor{ Hit.GetActor() };
+		TargetActor->TakeDamage(
+			CharacterDamage,
+			TargetAttacketEvent,
+			GetOwner()->GetInstigatorController(),
+			GetOwner()
+		);
+	}
 }
 
