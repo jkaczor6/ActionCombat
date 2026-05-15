@@ -1,0 +1,2 @@
+#include "Interfaces/Fighter.h"
+

@@ -1,6 +1,7 @@
 #include "Combat/TraceComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Interfaces/Fighter.h"
 
 UTraceComponent::UTraceComponent()
 {
@@ -58,5 +59,15 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 			2.f
 		);
 	}
+	if (!bHasFoundTargets) {return;}
+	
+	float CharacterDamage{0.f};
+	
+	IFighter* FighterRef{ Cast<IFighter>(GetOwner()) };
+	if (!FighterRef) { return; }
+	
+	CharacterDamage = FighterRef->GetDamage();
+	
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString::Printf(TEXT("Damage: %f"), CharacterDamage));
 }
 
