@@ -73,12 +73,19 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	for (const FHitResult& Hit: OutResults)
 	{
 		AActor* TargetActor{ Hit.GetActor() };
+		if (TargetsToIgnore.Contains(TargetActor)) { continue; }
 		TargetActor->TakeDamage(
 			CharacterDamage,
 			TargetAttacketEvent,
 			GetOwner()->GetInstigatorController(),
 			GetOwner()
 		);
+		TargetsToIgnore.AddUnique(TargetActor);
 	}
+}
+
+void UTraceComponent::HandleResetAttack()
+{
+	TargetsToIgnore.Empty();
 }
 
