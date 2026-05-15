@@ -14,8 +14,11 @@ class ACTIONCOMBAT_API UCombatComponent : public UActorComponent
 	TArray<UAnimMontage*> AttackAnimations;
 	
 	ACharacter* CharacterRef;
+	
 	UPROPERTY(VisibleAnywhere)
 	int ComboCounter{0};
+	UPROPERTY(VisibleAnywhere)
+	bool bCanAttack{ true };
 public:	
 	UCombatComponent();
 
@@ -28,4 +31,6 @@ public:
 		
 	UFUNCTION(BlueprintCallable)
 	void ComboAttack();
+	UFUNCTION(BlueprintCallable)
+	void HandleResetAttack();
 };
