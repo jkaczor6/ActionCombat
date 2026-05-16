@@ -21,12 +21,21 @@ void UStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 
 }
 
-void UStatsComponent::ReduceHealth(float Damage)
+void UStatsComponent::ReduceHealth(float Amount)
 {
 	if (Stats[EStats::Health] <= 0) { return; }
 	
-	Stats[EStats::Health] -= Damage;
+	Stats[EStats::Health] -= Amount;
 	
 	Stats[EStats::Health] = UKismetMathLibrary::FClamp(Stats[EStats::Health], 0, Stats[EStats::MaxHealth]);
+}
+
+void UStatsComponent::ReduceStamina(float Amount)
+{
+	if (Stats[EStats::Stamina] <= 0) { return; }
+	
+	Stats[EStats::Stamina] -= Amount;
+	
+	Stats[EStats::Stamina] = UKismetMathLibrary::FClamp(Stats[EStats::Stamina], 0, Stats[EStats::MaxStamina]);
 }
 
