@@ -11,7 +11,6 @@ void UStatsComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Cyan, FString::Printf(TEXT("Health: %f"), Stats["Health"]));
 }
 
 
