@@ -14,6 +14,18 @@ class ACTIONCOMBAT_API AMainCharacter : public ACharacter, public IMainPlayer, p
 public:
 	AMainCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UStatsComponent* StatsComp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class ULockonComponent* LockonComp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UCombatComponent* CombatComp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UTraceComponent* TraceComp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UBlockComponent* BlockComp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UPlayerActionsComponent* PlayerActionsComp;
 protected:
 	virtual void BeginPlay() override;
 
