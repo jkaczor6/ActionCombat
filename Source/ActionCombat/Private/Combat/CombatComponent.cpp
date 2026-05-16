@@ -1,5 +1,6 @@
 #include "Combat/CombatComponent.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/MainPlayer.h"
 #include "Kismet/KismetMathLibrary.h"
 
 UCombatComponent::UCombatComponent()
@@ -18,6 +19,11 @@ void UCombatComponent::BeginPlay()
 
 void UCombatComponent::ComboAttack()
 {
+	if (CharacterRef->Implements<UMainPlayer>())
+	{
+		IMainPlayer* IPlayerRef{ Cast<IMainPlayer>(CharacterRef) };
+		if (IPlayerRef && !IPlayerRef->HasEnoughStamina(StaminaCost)) { return; }
+	}
 	if (!bCanAttack) { return; }
 	
 	bCanAttack = false;

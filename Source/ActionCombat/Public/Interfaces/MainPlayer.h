@@ -15,4 +15,5 @@ class ACTIONCOMBAT_API IMainPlayer
 	GENERATED_BODY()
 
 public:
+	virtual bool HasEnoughStamina(float StaminaCost){ return true; }
 };
