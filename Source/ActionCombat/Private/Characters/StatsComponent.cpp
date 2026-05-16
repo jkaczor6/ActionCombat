@@ -1,4 +1,5 @@
 #include "Characters/StatsComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 UStatsComponent::UStatsComponent()
 {
@@ -18,5 +19,14 @@ void UStatsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+}
+
+void UStatsComponent::ReduceHealth(float Damage)
+{
+	if (Stats[EStats::Health] <= 0) { return; }
+	
+	Stats[EStats::Health] -= Damage;
+	
+	Stats[EStats::Health] = UKismetMathLibrary::FClamp(Stats[EStats::Health], 0, Stats[EStats::MaxHealth]);
 }
 

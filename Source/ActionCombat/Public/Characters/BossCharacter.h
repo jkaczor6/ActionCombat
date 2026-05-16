@@ -13,6 +13,8 @@ class ACTIONCOMBAT_API ABossCharacter : public ACharacter, public IEnemy
 public:
 	ABossCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UStatsComponent* StatsComp;
 protected:
 	virtual void BeginPlay() override;
 
