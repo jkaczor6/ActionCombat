@@ -39,3 +39,13 @@ void UStatsComponent::ReduceStamina(float Amount)
 	Stats[EStats::Stamina] = UKismetMathLibrary::FClamp(Stats[EStats::Stamina], 0, Stats[EStats::MaxStamina]);
 }
 
+void UStatsComponent::RegenStamina()
+{
+	Stats[EStats::Stamina] = UKismetMathLibrary::FInterpTo_Constant(
+		Stats[EStats::Stamina],
+		Stats[EStats::MaxStamina],
+		GetWorld()->DeltaTimeSeconds,
+		StaminaRegenRate
+	);
+}
+

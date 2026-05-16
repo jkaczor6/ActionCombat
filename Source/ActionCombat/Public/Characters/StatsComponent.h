@@ -11,6 +11,8 @@ class ACTIONCOMBAT_API UStatsComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
+	UPROPERTY(EditAnywhere)
+	double StaminaRegenRate{ 10.0 };
 public:	
 	UStatsComponent();
 
@@ -27,4 +29,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void ReduceStamina(float Amount);
+	
+	UFUNCTION(BlueprintCallable)
+	void RegenStamina();
 };
