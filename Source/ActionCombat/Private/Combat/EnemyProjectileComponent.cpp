@@ -1,4 +1,5 @@
 #include "Combat/EnemyProjectileComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 UEnemyProjectileComponent::UEnemyProjectileComponent()
 {
@@ -24,7 +25,10 @@ void UEnemyProjectileComponent::SpawnProjectile(FName ComponentName, TSubclassOf
 	if (!SpawnPointComp) { return; }
 	
 	FVector SpawnLocation{ SpawnPointComp->GetComponentLocation() };
+	FVector PlayerLocation{ GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation() };
 	
-	GetWorld()->SpawnActor(ProjectileClass, &SpawnLocation);
+	FRotator SpawnRotation{ UKismetMathLibrary::FindLookAtRotation(SpawnLocation, PlayerLocation) };
+	
+	GetWorld()->SpawnActor(ProjectileClass, &SpawnLocation, &SpawnRotation);
 }
 
