@@ -25,3 +25,10 @@ void ABossCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+void ABossCharacter::DetectPawn(APawn* DetectedPawn, APawn* PawnToCheckFor)
+{
+	if (DetectedPawn != PawnToCheckFor) { return; }
+	
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Detected Player!"));
+}
