@@ -1,5 +1,7 @@
 #include "Characters/BossCharacter.h"
 #include "Characters/StatsComponent.h"
+#include "AIController.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 ABossCharacter::ABossCharacter()
 {
@@ -12,6 +14,9 @@ void ABossCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	BlackboardComp = GetController<AAIController>()->GetBlackboardComponent();
+	
+	BlackboardComp->SetValueAsEnum(TEXT("CurrentState"), InitialState);
 }
 
 void ABossCharacter::Tick(float DeltaTime)
@@ -28,7 +33,11 @@ void ABossCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ABossCharacter::DetectPawn(APawn* DetectedPawn, APawn* PawnToCheckFor)
 {
-	if (DetectedPawn != PawnToCheckFor) { return; }
+	EEnemyState CurrentState{
+		static_cast<EEnemyState>(BlackboardComp->GetValueAsEnum(TEXT("CurrentState")))
+	};
 	
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Cyan, TEXT("Detected Player!"));
+	if (DetectedPawn != PawnToCheckFor || CurrentState != EEnemyState::Idle) { return; }
+	
+	BlackboardComp->SetValueAsEnum(TEXT("CurrentState"), EEnemyState::Range);
 }
