@@ -9,6 +9,8 @@ class ACTIONCOMBAT_API AEnemyProjectile : public AActor
 {
 	GENERATED_BODY()
 	
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* HitTemplate;
 public:	
 	AEnemyProjectile();
 
