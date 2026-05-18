@@ -15,6 +15,7 @@ class ACTIONCOMBAT_API ULookAtPlayerComponent : public UActorComponent
 public:	
 	ULookAtPlayerComponent();
 
+	bool bCanRotate{ false };
 protected:
 	virtual void BeginPlay() override;
 
