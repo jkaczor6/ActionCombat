@@ -70,7 +70,7 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 	if (!FighterRef) { return; }
 	
 	CharacterDamage = FighterRef->GetDamage();
-	FDamageEvent TargetAttacketEvent;	
+	FDamageEvent TargetAttackedEvent;	
 	
 	for (const FHitResult& Hit: OutResults)
 	{
@@ -78,7 +78,7 @@ void UTraceComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActor
 		if (TargetsToIgnore.Contains(TargetActor)) { continue; }
 		TargetActor->TakeDamage(
 			CharacterDamage,
-			TargetAttacketEvent,
+			TargetAttackedEvent,
 			GetOwner()->GetInstigatorController(),
 			GetOwner()
 		);

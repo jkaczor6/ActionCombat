@@ -11,6 +11,8 @@ class ACTIONCOMBAT_API AEnemyProjectile : public AActor
 	
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* HitTemplate;
+	UPROPERTY(EditAnywhere)
+	float ProjectileDamage{ 20.f };
 public:	
 	AEnemyProjectile();
 
