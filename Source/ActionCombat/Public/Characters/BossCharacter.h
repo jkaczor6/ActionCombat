@@ -4,10 +4,11 @@
 #include "GameFramework/Character.h"
 #include "Interfaces/Enemy.h"
 #include "Characters/EEnemyState.h"
+#include "Interfaces/Fighter.h"
 #include "BossCharacter.generated.h"
 
 UCLASS()
-class ACTIONCOMBAT_API ABossCharacter : public ACharacter, public IEnemy
+class ACTIONCOMBAT_API ABossCharacter : public ACharacter, public IEnemy, public IFighter
 {
 	GENERATED_BODY()
 	
@@ -32,4 +33,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void DetectPawn(APawn* DetectedPawn, APawn* PawnToCheckFor);
+	
+	virtual float GetDamage() override;
 };
