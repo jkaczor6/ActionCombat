@@ -18,6 +18,8 @@ class ACTIONCOMBAT_API UBTT_ChargeAttack : public UBTTaskNode
 	UPROPERTY(EditAnywhere)
 	float AcceptableRadius{ 100.f };
 	
+	FScriptDelegate MoveCompletedDelegate;
+	
 protected:
 	virtual void TickTask ( UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 	
@@ -27,4 +29,10 @@ public:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 	
 	void ChargeAtPlayer();
+	
+	UFUNCTION()
+	void HandleMoveCompleted();
+	
+	UFUNCTION()
+	void FinishAttackTask();
 };

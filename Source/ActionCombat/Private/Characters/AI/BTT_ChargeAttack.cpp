@@ -9,6 +9,8 @@
 UBTT_ChargeAttack::UBTT_ChargeAttack()
 {
 	bNotifyTick = true;
+	
+	MoveCompletedDelegate.BindUFunction(this, "HandleMoveCompleted");
 }
 
 void UBTT_ChargeAttack::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -47,4 +49,20 @@ void UBTT_ChargeAttack::ChargeAtPlayer()
 	
 	ControllerRef->MoveTo(MoveRequest);
 	ControllerRef->SetFocus(PlayerRef);
+	
+	ControllerRef->ReceiveMoveCompleted.AddUnique(MoveCompletedDelegate);
+}
+
+void UBTT_ChargeAttack::HandleMoveCompleted()
+{
+	BossAnim->bIsCharging = false;
+	
+	FTimerHandle AttackTimerHandler;
+	
+	CharacterRef->GetWorldTimerManager().SetTimer(AttackTimerHandler, this, &UBTT_ChargeAttack::FinishAttackTask, 1.f, false);
+}
+
+void UBTT_ChargeAttack::FinishAttackTask()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Task finished"));
 }
