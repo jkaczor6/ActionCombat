@@ -46,4 +46,6 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	void HandleDeath();
+	
+	virtual void EndLockonWithActor(AActor* ActorRef) override;
 };

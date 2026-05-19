@@ -6,6 +6,7 @@
 #include "Combat/CombatComponent.h"
 #include "Characters/MainCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "Interfaces/MainPlayer.h"
 
 ABossCharacter::ABossCharacter()
 {
@@ -91,6 +92,10 @@ void ABossCharacter::HandleDeath()
 	FTimerHandle DestroyTimerHandle;
 	GetWorldTimerManager().SetTimer(DestroyTimerHandle, this, &ABossCharacter::FinishDeathAnimation, AnimDuration, false);
 	
+	IMainPlayer* PlayerRef{ GetWorld()->GetFirstPlayerController()->GetPawn<IMainPlayer>() };
+	if (!PlayerRef) { return; }
+	
+	PlayerRef->EndLockonWithActor(this);
 }
 
 void ABossCharacter::FinishDeathAnimation()
