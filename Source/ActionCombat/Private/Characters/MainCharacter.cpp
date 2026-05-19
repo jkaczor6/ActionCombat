@@ -51,3 +51,9 @@ bool AMainCharacter::HasEnoughStamina(float StaminaCost)
 	return StatsComp->Stats[EStats::Stamina] >= StaminaCost;
 }
 
+void AMainCharacter::HandleDeath()
+{
+	PlayAnimMontage(DeathAnimMontage);
+	DisableInput(GetController<APlayerController>());
+}
+

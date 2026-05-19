@@ -11,6 +11,9 @@ class ACTIONCOMBAT_API AMainCharacter : public ACharacter, public IMainPlayer, p
 {
 	GENERATED_BODY()
 
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* DeathAnimMontage;
+	
 public:
 	AMainCharacter();
 
@@ -40,4 +43,7 @@ public:
 	virtual float GetDamage() override;
 	
 	virtual bool HasEnoughStamina(float StaminaCost) override;
+	
+	UFUNCTION(BlueprintCallable)
+	void HandleDeath();
 };
