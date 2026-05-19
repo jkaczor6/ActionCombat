@@ -17,6 +17,11 @@ class ACTIONCOMBAT_API ABossCharacter : public ACharacter, public IEnemy, public
 	
 	class UBlackboardComponent* BlackboardComp;
 	
+	UPROPERTY(EditAnywhere)
+	UAnimMontage* DeathAnimMontage;
+	
+	class AAIController* ControllerRef;
+	
 public:
 	ABossCharacter();
 
@@ -46,4 +51,7 @@ public:
 	
 	UFUNCTION()
 	void HandlePlayerDeath();
+	
+	UFUNCTION(BlueprintCallable)
+	void HandleDeath();
 };
