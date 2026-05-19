@@ -17,8 +17,9 @@ void UBTT_MeleeAttack::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMe
 {
 	float Distance{ OwnerComp.GetBlackboardComponent()->GetValueAsFloat("Distance") };
 	AAIController* AIRef{ OwnerComp.GetAIOwner() };
+	IFighter* FighterRef{ Cast<IFighter>(AIRef->GetCharacter()) };
 	
-	if (Distance > MeleeRange)
+	if (Distance > FighterRef->GetMeleeRange())
 	{
 		OwnerComp.GetBlackboardComponent()->SetValueAsEnum("CurrentState", EEnemyState::Range);
 		AbortTask(OwnerComp, NodeMemory);
