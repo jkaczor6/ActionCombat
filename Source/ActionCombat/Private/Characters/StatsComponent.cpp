@@ -29,6 +29,11 @@ void UStatsComponent::ReduceHealth(float Amount)
 	Stats[EStats::Health] = UKismetMathLibrary::FClamp(Stats[EStats::Health], 0, Stats[EStats::MaxHealth]);
 	
 	OnHealthPercentUpdateDelegate.Broadcast(GetStatPercentage(EStats::Health, EStats::MaxHealth));
+	
+	if (Stats[EStats::Health] == 0)
+	{
+		OnZeroHealthDelegate.Broadcast();
+	}
 }
 
 void UStatsComponent::ReduceStamina(float Amount)
