@@ -16,4 +16,5 @@ class ACTIONCOMBAT_API IFighter
 
 public:
 	virtual float GetDamage(){return 0.f;}
+	virtual void Attack() {};
 };

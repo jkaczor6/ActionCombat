@@ -2,12 +2,14 @@
 #include "Characters/StatsComponent.h"
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "Combat/CombatComponent.h"
 
 ABossCharacter::ABossCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
 	StatsComp = CreateDefaultSubobject<UStatsComponent>(TEXT("Stats Component"));
+	CombatComp = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat Component"));
 }
 
 void ABossCharacter::BeginPlay()
@@ -45,4 +47,9 @@ void ABossCharacter::DetectPawn(APawn* DetectedPawn, APawn* PawnToCheckFor)
 float ABossCharacter::GetDamage()
 {
 	return StatsComp->Stats[EStats::Strength];
+}
+
+void ABossCharacter::Attack()
+{
+	CombatComp->RandomAttack();
 }
