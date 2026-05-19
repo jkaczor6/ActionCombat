@@ -5,6 +5,11 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Characters/EEnemyState.h"
 
+UBTT_RangeAttack::UBTT_RangeAttack()
+{
+	bCreateNodeInstance = true;
+}
+
 EBTNodeResult::Type UBTT_RangeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	ACharacter* CharacterRef{ OwnerComp.GetAIOwner()->GetPawn<ACharacter>() };

@@ -18,5 +18,6 @@ class ACTIONCOMBAT_API UBTT_RangeAttack : public UBTTaskNode
 	float MeleeRange{ 1250.f };
 	
 public:
+	UBTT_RangeAttack();
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 };

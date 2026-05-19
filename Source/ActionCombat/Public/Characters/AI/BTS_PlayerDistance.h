@@ -9,6 +9,8 @@ class ACTIONCOMBAT_API UBTS_PlayerDistance : public UBTService
 {
 	GENERATED_BODY()
 	
+public:
+	UBTS_PlayerDistance();
 protected:
 	virtual void TickNode ( UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 };

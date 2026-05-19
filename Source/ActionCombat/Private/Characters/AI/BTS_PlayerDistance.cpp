@@ -3,6 +3,11 @@
 #include "AIController.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
+UBTS_PlayerDistance::UBTS_PlayerDistance()
+{
+	bCreateNodeInstance = true;
+}
+
 void UBTS_PlayerDistance::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	AAIController* OwnerRef{ OwnerComp.GetAIOwner() };
