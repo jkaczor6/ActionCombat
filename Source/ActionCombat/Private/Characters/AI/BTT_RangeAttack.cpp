@@ -11,6 +11,15 @@ EBTNodeResult::Type UBTT_RangeAttack::ExecuteTask(UBehaviorTreeComponent& OwnerC
 	
 	if (!CharacterRef) { return EBTNodeResult::Failed; }
 	
+	float Distance{ OwnerComp.GetBlackboardComponent()->GetValueAsFloat("Distance") };
+	if (Distance < MeleeRange)
+	{
+		OwnerComp.GetBlackboardComponent()->SetValueAsEnum("CurrentState", EEnemyState::Melee);
+		AbortTask(OwnerComp, NodeMemory);
+		
+		return EBTNodeResult::Aborted;
+	}
+	
 	CharacterRef->PlayAnimMontage(AnimMontage);
 	
 	double RandomValue{ UKismetMathLibrary::RandomFloat() };
