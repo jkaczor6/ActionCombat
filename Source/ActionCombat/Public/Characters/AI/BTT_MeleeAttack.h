@@ -13,6 +13,8 @@ class ACTIONCOMBAT_API UBTT_MeleeAttack : public UBTTaskNode
 	float AttackRadius{ 200.f };
 	UPROPERTY(EditAnywhere)
 	float AcceptableRadius{ 100.f };	
+	UPROPERTY(EditAnywhere)
+	float MeleeRange{ 1250.f };
 	
 	FScriptDelegate MoveDelegate;
 	
