@@ -27,6 +27,8 @@ void UStatsComponent::ReduceHealth(float Amount)
 	Stats[EStats::Health] -= Amount;
 	
 	Stats[EStats::Health] = UKismetMathLibrary::FClamp(Stats[EStats::Health], 0, Stats[EStats::MaxHealth]);
+	
+	OnHealthPercentUpdateDelegate.Broadcast(GetStatPercentage(EStats::Health, EStats::MaxHealth));
 }
 
 void UStatsComponent::ReduceStamina(float Amount)
@@ -46,6 +48,8 @@ void UStatsComponent::ReduceStamina(float Amount)
 		StaminaDelayDuration,
 		FunctionInfo
 	);
+	
+	OnStaminaPercentUpdateDelegate.Broadcast(GetStatPercentage(EStats::Stamina, EStats::MaxStamina));
 }
 
 void UStatsComponent::RegenStamina()
@@ -58,10 +62,16 @@ void UStatsComponent::RegenStamina()
 		GetWorld()->DeltaTimeSeconds,
 		StaminaRegenRate
 	);
+	OnStaminaPercentUpdateDelegate.Broadcast(GetStatPercentage(EStats::Stamina, EStats::MaxStamina));
 }
 
 void UStatsComponent::EnableRegen()
 {
 	bCanRegen = true;
+}
+
+float UStatsComponent::GetStatPercentage(EStats Current, EStats Max)
+{
+	return Stats[Current] / Stats[Max];
 }
 
