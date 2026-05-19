@@ -31,6 +31,8 @@ public:
 	
 	UPROPERTY(BlueprintAssignable)
 	FOnAttackPerformedSignature OnAttackPerformedDelegate;
+	
+	float AnimDuration;
 protected:
 	virtual void BeginPlay() override;
 
